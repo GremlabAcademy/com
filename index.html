@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gremlab Academy - Academia de Música</title>
+    <meta name="description" content="Aprende con los mejores músicos. Clases personalizadas de guitarra, piano, batería.">
+    
+    <!-- Google Fonts: Outfit (Misma fuente que el original) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config for Custom Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FFAA19',
+                        primaryHover: '#e59610',
+                        piano: '#EF4444', // Rojo
+                        pianoHover: '#DC2626',
+                        minor: '#8B5CF6', // Morado
+                        dark: '#111827',
+                    },
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Animations & Effects */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+        
+        .hero-overlay {
+            background: linear-gradient(to right, rgba(17, 24, 39, 0.9) 0%, rgba(17, 24, 39, 0.6) 50%, rgba(17, 24, 39, 0.2) 100%);
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .image-zoom:hover img {
+            transform: scale(1.05);
+        }
+        
+        .image-zoom img {
+            transition: transform 0.5s ease;
+        }
+
+        /* Pulse effect for WhatsApp */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+        .whatsapp-btn {
+            animation: pulse-ring 2s infinite;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 antialiased bg-gray-50">
+
+    <!-- Navbar -->
+    <header id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="text-2xl font-extrabold tracking-tighter flex items-center gap-2 text-white transition-colors" id="logo-text">
+                <div class="h-10 w-10 bg-primary text-gray-900 rounded-full flex items-center justify-center font-black text-2xl shadow-md">G</div> Gremlab Academy
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-8 font-medium">
+                <a href="#" class="text-white hover:text-primary transition-colors nav-link">NOSOTROS</a>
+                <a href="#courses-section" class="text-white hover:text-primary transition-colors nav-link">CURSOS</a>
+                <a href="#footer" class="text-white hover:text-primary transition-colors nav-link">CONTACTO</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="https://api.whatsapp.com/send?phone=51925892679" target="_blank" class="bg-primary text-gray-900 hover:bg-primaryHover px-6 py-2.5 rounded-full font-bold transition-all shadow-lg hover:shadow-xl">
+                    Agenda tu Demo
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="mobile-menu-toggle" class="md:hidden text-white nav-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16" /><path d="M4 12h16" /><path d="M4 19h16" /></svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu (Hidden by default) -->
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-white shadow-xl py-4 px-4 flex flex-col gap-4">
+            <a href="#" class="text-gray-800 font-semibold hover:text-primary">NOSOTROS</a>
+            <a href="#courses-section" class="text-gray-800 font-semibold hover:text-primary">CURSOS</a>
+            <a href="#footer" class="text-gray-800 font-semibold hover:text-primary">CONTACTO</a>
+            <hr>
+            <a href="https://api.whatsapp.com/send?phone=51925892679" target="_blank" class="bg-primary text-gray-900 text-center py-3 rounded-full font-bold">Agenda tu Demo</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative h-[90vh] min-h-[600px] flex items-center" id="hero-section">
+            <!-- Background Image -->
+            <div class="absolute inset-0 w-full h-full">
+                <img src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80" alt="Concierto" class="w-full h-full object-cover" />
+                <div class="absolute inset-0 hero-overlay"></div>
+            </div>
+            
+            <!-- Content -->
+            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-20">
+                <div class="max-w-2xl text-white">
+                    <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-6">
+                        Tu primer escenario empieza en <span class="text-primary">Gremlab</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-200 mb-4 leading-relaxed font-light">
+                        Clases para niños, jóvenes y adultos, con docentes en actividad y una experiencia que va de la primera clase al escenario.
+                    </p>
+                    <p class="text-sm md:text-base text-gray-400 mb-8 font-medium tracking-wide uppercase">
+                        Clases desde los 6 años · Arequipa y Clases Virtuales
+                    </p>
+                    <a href="https://api.whatsapp.com/send?phone=51925892679" target="_blank" class="inline-block bg-primary text-gray-900 hover:bg-primaryHover px-8 py-4 rounded-full font-bold text-lg transition-all shadow-[0_0_20px_rgba(255,170,25,0.4)] hover:scale-105">
+                        Agenda tu Demo Gratis
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Bar -->
+        <section class="bg-minor text-white py-8" id="stats-bar">
+            <div class="max-w-5xl mx-auto px-4 flex flex-wrap justify-around items-center gap-6 text-center">
+                <div>
+                    <span class="block text-4xl md:text-5xl font-extrabold text-primary mb-1">+100</span>
+                    <span class="block text-sm uppercase tracking-wider font-semibold opacity-90">Alumnos Atendidos</span>
+                </div>
+                <div>
+                    <span class="block text-4xl md:text-5xl font-extrabold text-primary mb-1">Arequipa</span>
+                    <span class="block text-sm uppercase tracking-wider font-semibold opacity-90">Y Modalidad Virtual</span>
+                </div>
+                <div>
+                    <span class="block text-4xl md:text-5xl font-extrabold text-primary mb-1">2</span>
+                    <span class="block text-sm uppercase tracking-wider font-semibold opacity-90">Años de Trayectoria</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Courses Section -->
+        <section class="py-20 bg-gray-50" id="courses-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-dark mb-4">Nuestros Cursos</h2>
+                    <div class="h-1 w-24 bg-primary mx-auto rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Curso: Guitarra -->
+                    <article class="bg-white rounded-3xl overflow-hidden shadow-lg card-hover image-zoom group">
+                        <div class="h-56 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1525201548942-d8732f6617a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Guitarra" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-dark mb-2">Guitarra</h3>
+                            <div class="flex items-center text-gray-500 mb-6 text-sm font-medium">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg>
+                                Desde los 7 años
+                            </div>
+                            <a href="https://api.whatsapp.com/send?phone=51925892679" target="_blank" class="block w-full text-center bg-gray-100 text-gray-800 group-hover:bg-primary group-hover:text-gray-900 py-3 rounded-xl font-bold transition-colors">Agenda tu Demo</a>
+                        </div>
+                    </article>
+
+                    <!-- Curso: Piano (ROJO) -->
+                    <article class="bg-white rounded-3xl overflow-hidden shadow-lg card-hover image-zoom group ring-2 ring-transparent hover:ring-piano transition-all">
+                        <div class="h-56 overflow-hidden relative">
+                            <div class="absolute top-4 right-4 bg-piano text-white px-3 py-1 rounded-full text-xs font-bold z-10 shadow-md">DESTACADO</div>
+                            <img src="https://images.unsplash.com/photo-1552422535-c45813c61732?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Piano" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-piano mb-2">Piano</h3>
+                            <div class="flex items-center text-gray-500 mb-6 text-sm font-medium">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2 text-piano"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg>
+                                Desde los 6 años
+                            </div>
+                            <a href="https://api.whatsapp.com/send?phone=51925892679" target="_blank" class="block w-full text-center bg-piano text-white hover:bg-pianoHover py-3 rounded-xl font-bold transition-colors shadow-md">Agenda tu Demo</a>
+                        </div>
+                    </article>
+
+                    <!-- Curso: Batería -->
+                    <article class="bg-white rounded-3xl overflow-hidden shadow-lg card-hover image-zoom group">
+                        <div class="h-56 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1519892300165-cb5542fb47c7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Batería" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-dark mb-2">Batería</h3>
+                            <div class="flex items-center text-gray-500 mb-6 text-sm font-medium">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg>
+                                Desde los 7 años
+                            </div>
+                            <a href="https://api.whatsapp.com/send?phone=51925892679" target="_blank" class="block w-full text-center bg-gray-100 text-gray-800 group-hover:bg-primary group-hover:text-gray-900 py-3 rounded-xl font-bold transition-colors">Agenda tu Demo</a>
+                        </div>
+                    </article>
+
+                    <!-- Curso: Teoría Musical -->
+                    <article class="bg-white rounded-3xl overflow-hidden shadow-lg card-hover image-zoom group">
+                        <div class="h-56 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1507838153414-b4b713384a76?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Teoría Musical" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-dark mb-2">Teoría Musical</h3>
+                            <div class="flex items-center text-gray-500 mb-6 text-sm font-medium">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg>
+                                Desde los 6 años
+                            </div>
+                            <a href="https://api.whatsapp.com/send?phone=51925892679" target="_blank" class="block w-full text-center bg-gray-100 text-gray-800 group-hover:bg-primary group-hover:text-gray-900 py-3 rounded-xl font-bold transition-colors">Agenda tu Demo</a>
+                        </div>
+                    </article>
+
+                    <!-- Curso: Lectura Musical -->
+                    <article class="bg-white rounded-3xl overflow-hidden shadow-lg card-hover image-zoom group">
+                        <div class="h-56 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1574169208507-84376144848b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Lectura Musical" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-2xl font-bold text-dark mb-2">Refuerzo en Lectura Musical</h3>
+                            <div class="flex items-center text-gray-500 mb-6 text-sm font-medium">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /><path d="M16 3.128a4 4 0 0 1 0 7.744" /><path d="M22 21v-2a4 4 0 0 0-3-3.87" /><circle cx="9" cy="7" r="4" /></svg>
+                                Todas las edades
+                            </div>
+                            <a href="https://api.whatsapp.com/send?phone=51925892679" target="_blank" class="block w-full text-center bg-gray-100 text-gray-800 group-hover:bg-primary group-hover:text-gray-900 py-3 rounded-xl font-bold transition-colors">Agenda tu Demo</a>
+                        </div>
+                    </article>
+
+                </div>
+
+                <div class="mt-16 text-center">
+                    <a href="#" class="inline-block border-2 border-primary text-gray-800 hover:bg-primary hover:text-gray-900 px-8 py-4 rounded-full font-bold text-lg transition-colors">
+                        Ver Todos Nuestros Cursos
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="py-20 bg-white" id="benefits-section">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-dark mb-4">¿Por qué Gremlab?</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Nuestra metodología te permite tocar canciones desde el primer día, haciendo el aprendizaje divertido y efectivo.</p>
+                </div>
+
+                <div class="flex flex-col lg:flex-row gap-12 items-center">
+                    <!-- Images Mosaic -->
+                    <div class="w-full lg:w-1/2 grid grid-cols-2 gap-4">
+                        <div class="col-span-2 relative h-64 rounded-3xl overflow-hidden shadow-lg image-zoom group">
+                            <img src="https://images.unsplash.com/photo-1598387181032-a3103a2db5b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Estudiante en escenario" class="w-full h-full object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex items-end p-6">
+                                <p class="text-white font-bold text-lg">Que tu hijo no solo aprenda canciones. Que viva el escenario.</p>
+                            </div>
+                        </div>
+                        <div class="relative h-48 rounded-3xl overflow-hidden shadow-lg image-zoom">
+                            <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Banda en vivo" class="w-full h-full object-cover">
+                        </div>
+                        <div class="relative h-48 rounded-3xl overflow-hidden shadow-lg image-zoom">
+                            <img src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Niños tocando" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+
+                    <!-- Icons Grid -->
+                    <div class="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10">
+                        <!-- Icon 1 -->
+                        <div>
+                            <div class="bg-minor/10 w-14 h-14 flex items-center justify-center rounded-2xl mb-4 text-minor shadow-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg>
+                            </div>
+                            <h4 class="text-xl font-bold text-dark mb-2">100% Personalizado</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Clases 1 a 1 o en grupos de máximo 4 personas. ¡Olvídate de las aulas repletas donde no avanzas!</p>
+                        </div>
+                        <!-- Icon 2 -->
+                        <div>
+                            <div class="bg-minor/10 w-14 h-14 flex items-center justify-center rounded-2xl mb-4 text-minor shadow-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+                            </div>
+                            <h4 class="text-xl font-bold text-dark mb-2">Música Aplicada</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Enfocado a géneros modernos. Aprenderás las técnicas usando las canciones que realmente te gustan.</p>
+                        </div>
+                        <!-- Icon 3 -->
+                        <div>
+                            <div class="bg-minor/10 w-14 h-14 flex items-center justify-center rounded-2xl mb-4 text-minor shadow-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10s3-3 3-8"/><path d="M22 10s-3-3-3-8"/><path d="M10 2c0 4.4-3.6 8-8 8"/><path d="M14 2c0 4.4 3.6 8 8 8"/><path d="M2 10s2 2 2 5"/><path d="M22 10s-2 2-2 5"/><path d="M8 15h8"/><path d="M2 22v-1a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1"/><path d="M14 22v-1a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1"/></svg>
+                            </div>
+                            <h4 class="text-xl font-bold text-dark mb-2">Toca desde el día 1</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Nuestra metodología está diseñada para que sientas tu progreso tocando desde la primera clase.</p>
+                        </div>
+                        <!-- Icon 4 -->
+                        <div>
+                            <div class="bg-minor/10 w-14 h-14 flex items-center justify-center rounded-2xl mb-4 text-minor shadow-sm">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg>
+                            </div>
+                            <h4 class="text-xl font-bold text-dark mb-2">Docentes Pro</h4>
+                            <p class="text-gray-600 text-sm leading-relaxed">Músicos con trayectoria y en actividad que te guiarán paso a paso en tu formación.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Experience -->
+        <section class="py-24 bg-dark text-white relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="flex flex-col lg:flex-row items-center gap-16">
+                    <div class="lg:w-1/2">
+                        <span class="text-primary font-bold tracking-widest uppercase text-sm mb-4 block">Conoce Gremlab</span>
+                        <h2 class="text-4xl md:text-5xl font-extrabold mb-6">La experiencia que transforma</h2>
+                        <p class="text-gray-300 text-lg mb-8 leading-relaxed">Nuestras clases van más allá de la técnica: recitales reales, grabaciones y una comunidad que acompaña el avance de cada alumno.</p>
+                        
+                        <div class="flex flex-wrap gap-4">
+                            <span class="bg-white/10 px-4 py-2 rounded-full text-sm font-medium border border-white/20">Instrumentos para tu uso</span>
+                            <span class="bg-white/10 px-4 py-2 rounded-full text-sm font-medium border border-white/20">Salas equipadas</span>
+                            <span class="bg-white/10 px-4 py-2 rounded-full text-sm font-medium border border-white/20">Docentes activos</span>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:w-1/2 relative">
+                        <div class="aspect-video bg-gray-800 rounded-3xl overflow-hidden relative shadow-2xl ring-4 ring-primary/20">
+                            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Video cover" class="w-full h-full object-cover opacity-60">
+                            <button class="absolute inset-0 m-auto w-20 h-20 bg-primary text-gray-900 rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-[0_0_30px_rgba(255,170,25,0.5)]">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-1"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-extrabold text-dark mb-4">Lo que dicen nuestros alumnos</h2>
+                    <p class="text-gray-600">Cada voz cuenta una historia de crecimiento musical.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-white p-8 rounded-3xl shadow-md relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="text-minor absolute top-6 right-6 opacity-20"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" /><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" /></svg>
+                        <p class="text-gray-600 italic mb-8 relative z-10 text-sm leading-relaxed">“He llevado clases de mandolina antes, y no aprendí bien, en cambio aquí aprendo la guitarra con canciones que me gustan y la información es clara y directa.”</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-primary/20 text-primary font-bold rounded-full flex items-center justify-center">AG</div>
+                            <div>
+                                <h5 class="font-bold text-dark">Almendra Gutierrez</h5>
+                                <span class="text-sm text-gray-500">Alumna de Guitarra</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 (Featured) -->
+                    <div class="bg-minor text-white p-8 rounded-3xl shadow-xl transform md:-translate-y-4 relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="text-white absolute top-6 right-6 opacity-20"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" /><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" /></svg>
+                        <p class="text-gray-100 italic mb-8 relative z-10 text-base leading-relaxed">“Llevaba tocando el piano con puros videos, pero con el maestro lleva lo difícil a lo fácil y pude aprender canciones complicadas que antes no creí poder.”</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-white text-minor font-bold rounded-full flex items-center justify-center">RM</div>
+                            <div>
+                                <h5 class="font-bold text-white">Rafael Mejia</h5>
+                                <span class="text-sm text-gray-200">Alumno de Piano</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="bg-white p-8 rounded-3xl shadow-md relative">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="text-minor absolute top-6 right-6 opacity-20"><path d="M16 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" /><path d="M5 3a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2 1 1 0 0 1 1 1v1a2 2 0 0 1-2 2 1 1 0 0 0-1 1v2a1 1 0 0 0 1 1 6 6 0 0 0 6-6V5a2 2 0 0 0-2-2z" /></svg>
+                        <p class="text-gray-600 italic mb-8 relative z-10 text-sm leading-relaxed">“Aprendí que debo confiar en el proceso y no importa lo difícil que sea algo en la batería; si bajo el tempo, podré tocarlo eventualmente.”</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 bg-primary/20 text-primary font-bold rounded-full flex items-center justify-center">JC</div>
+                            <div>
+                                <h5 class="font-bold text-dark">Josias Ccaso</h5>
+                                <span class="text-sm text-gray-500">Alumno de Batería</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social Feed (Instagram Style) -->
+        <section class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <a href="https://www.instagram.com/gremlab.academy/" target="_blank" rel="noopener noreferrer" class="w-16 h-16 bg-gradient-to-tr from-yellow-400 via-primary to-minor text-white rounded-2xl flex items-center justify-center mx-auto mb-4 hover:scale-105 transition-transform shadow-lg cursor-pointer block">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" /></svg>
+                    </a>
+                    <h2 class="text-3xl font-extrabold text-dark mb-2">Nuestra Comunidad</h2>
+                    <p class="text-gray-600">Síguenos en <a href="https://www.instagram.com/gremlab.academy/" target="_blank" rel="noopener noreferrer" class="text-primary font-bold hover:underline">@gremlab.academy</a> y sé parte de nuestra familia.</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <!-- Post 1 -->
+                    <a href="https://www.instagram.com/gremlab.academy/" target="_blank" rel="noopener noreferrer" class="relative group cursor-pointer aspect-square rounded-2xl overflow-hidden bg-gray-200 block">
+                        <img src="https://images.unsplash.com/photo-1511192336575-5a79af67a629?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Instagram post">
+                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></svg>
+                        </div>
+                    </a>
+                    <!-- Post 2 -->
+                    <a href="https://www.instagram.com/gremlab.academy/" target="_blank" rel="noopener noreferrer" class="relative group cursor-pointer aspect-square rounded-2xl overflow-hidden bg-gray-200 block">
+                        <img src="https://images.unsplash.com/photo-1485278537138-4e8911a13c02?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Instagram post adolescente tocando guitarra">
+                    </a>
+                    <!-- Post 3 -->
+                    <a href="https://www.instagram.com/gremlab.academy/" target="_blank" rel="noopener noreferrer" class="relative group cursor-pointer aspect-square rounded-2xl overflow-hidden bg-gray-200 block">
+                        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Instagram post">
+                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" class="text-white"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z" /></svg>
+                        </div>
+                    </a>
+                    <!-- Post 4 -->
+                    <a href="https://www.instagram.com/gremlab.academy/" target="_blank" rel="noopener noreferrer" class="relative group cursor-pointer aspect-square rounded-2xl overflow-hidden bg-gray-200 block">
+                        <img src="https://images.unsplash.com/photo-1520523839897-bd0b52f945a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=60" class="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Instagram post adolescente tocando piano">
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-gray-300 pt-20 pb-10" id="footer">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <!-- Brand -->
+                <div>
+                    <a href="#" class="text-3xl font-extrabold text-white flex items-center gap-2 mb-4">
+                        <div class="h-12 w-12 bg-primary text-gray-900 rounded-full flex items-center justify-center font-black text-3xl shadow-md">G</div> Gremlab
+                    </a>
+                    <p class="text-sm text-gray-400 mb-6">Enseñamos a amar la música.</p>
+                    <div class="flex flex-wrap gap-4">
+                        <!-- Instagram -->
+                        <a href="https://www.instagram.com/gremlab.academy/" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-gray-900 transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
+                        <!-- Facebook -->
+                        <a href="https://www.facebook.com/GremlabAcademy" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-gray-900 transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+                        <!-- YouTube -->
+                        <a href="https://www.youtube.com/@GremlabAcademy" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-gray-900 transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></svg></a>
+                        <!-- TikTok -->
+                        <a href="https://www.tiktok.com/@gremlab.academy" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-gray-900 transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" /></svg></a>
+                        <!-- Linktree -->
+                        <a href="https://linktr.ee/Gremlab.Academy" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary hover:text-gray-900 transition-colors"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></a>
+                    </div>
+                </div>
+
+                <!-- Nav -->
+                <div>
+                    <h5 class="text-white font-bold text-lg mb-6">Navegación</h5>
+                    <ul class="flex flex-col gap-3">
+                        <li><a href="#" class="hover:text-primary transition-colors">Nosotros</a></li>
+                        <li><a href="#courses-section" class="hover:text-primary transition-colors">Cursos</a></li>
+                        <li><a href="https://api.whatsapp.com/send?phone=51925892679" class="hover:text-primary transition-colors">Contáctanos</a></li>
+                    </ul>
+                </div>
+
+                <!-- Sedes -->
+                <div>
+                    <h5 class="text-white font-bold text-lg mb-6">Nuestras Sedes</h5>
+                    <ul class="flex flex-col gap-3 text-sm">
+                        <li class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Arequipa (Sede Principal)</li>
+                        <li class="flex items-center gap-2"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-primary"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg> Clases Virtuales (Todo el Perú)</li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h5 class="text-white font-bold text-lg mb-6">Contáctanos</h5>
+                    <p class="text-sm mb-4">¿Tienes una pregunta? Escríbenos y te responderemos a la brevedad.</p>
+                    <a href="https://api.whatsapp.com/send?phone=51925892679" target="_blank" class="inline-block border border-primary text-primary hover:bg-primary hover:text-gray-900 px-6 py-2 rounded-full font-bold transition-colors mb-6">Ir a WhatsApp</a>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm">
+                <p>© 2026 Gremlab Academy. Todos los derechos reservados.</p>
+                <div class="flex gap-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-primary transition-colors">Privacidad</a>
+                    <a href="#" class="hover:text-primary transition-colors">Términos</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://api.whatsapp.com/send?phone=51925892679" target="_blank" class="fixed bottom-6 right-6 bg-[#25D366] text-white p-4 rounded-full shadow-2xl z-50 hover:bg-[#1ebe57] transition-colors whatsapp-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></svg>
+    </a>
+
+    <!-- Scripts -->
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        const logoText = document.getElementById('logo-text');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass-nav');
+                navbar.classList.remove('py-4');
+                navbar.classList.add('py-3');
+                
+                logoText.classList.remove('text-white');
+                logoText.classList.add('text-gray-900');
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('text-white');
+                    link.classList.add('text-gray-800');
+                });
+            } else {
+                navbar.classList.remove('glass-nav');
+                navbar.classList.remove('py-3');
+                navbar.classList.add('py-4');
+                
+                logoText.classList.add('text-white');
+                logoText.classList.remove('text-gray-900');
+                
+                navLinks.forEach(link => {
+                    link.classList.add('text-white');
+                    link.classList.remove('text-gray-800');
+                });
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
